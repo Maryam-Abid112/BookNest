@@ -76,8 +76,9 @@ const deletereview = async (req, res) => {
 
 const getreviewbyid=async(req,res)=>{
     try{
-   const{bookid}=req.body;
-   const reviews=await Review.find({book:bookid});
+   const{id}=req.params;
+    const reviews=await Review.find({book:id}).populate("user", "name");
+   
    if(reviews.length === 0){
      return res.status(404).json({message:"No reviews found"})
    }
@@ -85,6 +86,7 @@ const getreviewbyid=async(req,res)=>{
         reviews
         });
     }catch(err){
+        console.log(err);
          res.status(500).json({
             message: "Internal server error",
         });

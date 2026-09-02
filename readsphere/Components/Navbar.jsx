@@ -20,7 +20,7 @@ export default function Navbar() {
           <Link className="nav-link active" aria-current="page" href="/book">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" href="/about">About</Link>
+          <Link className="nav-link" href="/About">About</Link>
         </li>
                 <li className="nav-item">
           <Link className="nav-link" href="/Genre">Genre</Link>

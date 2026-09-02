@@ -1,11 +1,12 @@
 import React from 'react'
+import Link from 'next/link'
 
 export default function Bookcard({ book }) {
     return (
 
         <>
     
-           <div style={{ width: "180px" }}> 
+           <Link href={`/book/${book._id}`} className="text-decoration-none text-reset" style={{ width: "180px" }}> 
             <div className="card h-100 shadow-sm"> 
                 <img src={book.coverImage} className="card-img-top" alt={book.title} style={{ height: "240px", objectFit: "cover" }} /> 
                 <div className="card-body p-2"> 
@@ -17,7 +18,7 @@ export default function Bookcard({ book }) {
                       </div>
                        </div> 
                        </div> 
-           </div>
+           </Link>
 
         </>
     )
