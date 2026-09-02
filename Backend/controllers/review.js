@@ -20,6 +20,7 @@ const createreview = async (req, res) => {
         });
 
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             message: "Internal server error",
         });
@@ -89,5 +90,5 @@ const getreviewbyid=async(req,res)=>{
         });
     }
 }
-s
+
 export { updatereview, createreview, deletereview ,getreviewbyid};

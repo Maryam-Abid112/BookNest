@@ -1,6 +1,6 @@
 import {updatereview, createreview, deletereview } from '../controllers/review.js'
 import express from 'express'
-import {protect} from '../middleware/middle'
+import {protect} from '../middleware/middle.js'
 
 const router=express.Router();
 

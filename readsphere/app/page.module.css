@@ -1,0 +1,5 @@
+.bookcard{
+    display: flex;
+    flex-direction: row;
+
+}

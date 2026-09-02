@@ -59,7 +59,7 @@ const searchbook = async (req, res) => {
 
 const searchbookbygenre = async (req, res) => {
     try {
-        const { genre } = req.query;
+        const { genre } = req.params;
         const book = await Book.find({
             genres:{
             $regex: genre,
