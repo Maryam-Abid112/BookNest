@@ -10,8 +10,8 @@ export default async function page({params}) {
   console.log(book)
 
   const response=await fetch(`http://localhost:5000/api/review/getreview/${id}`,{cache:"no-store"});
-  const reviews= await response.json();
-  const review= reviews.reviews;
+  const reviews = await response.json();
+  const review = Array.isArray(reviews.reviews) ? reviews.reviews : [];
   console.log(review);
 
   return (
