@@ -1,6 +1,6 @@
 const signup=async(name,email,password)=>{
     
-    const response=await fetch("http://localhost:3000/api/signup",{
+    const response=await fetch("http://localhost:5000/api/User/signup",{
         method: "POST",
         headers: {
             "Content-Type": "application/json"

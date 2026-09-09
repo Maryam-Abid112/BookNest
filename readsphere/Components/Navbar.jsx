@@ -1,23 +1,23 @@
 "use client"
 import React from 'react'
 import { useState ,useEffect} from 'react';
+import { AuthContext } from '../context/Authcontext';
+import { useContext } from 'react';
 import Search from './Search';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 export default function Navbar() {
     const [search,setsearch]=useState('');
-    const [data,setdata]=useState(null);
+    const {token,setToken}=useContext(AuthContext);
+   
     const router = useRouter();
-     useEffect(() => {
-    const token = localStorage.getItem("token");
-    setdata(token);
-  }, []);
+
+
     
 
     const handlelogout=()=>{
        localStorage.removeItem("token");
-       
-
+       setToken(null);
     }
 
     const handlesignup=()=>{
@@ -50,7 +50,7 @@ export default function Navbar() {
         </li>
       </ul>
       <Search />
-      {(data)?(
+      {(token)?(
         <button className="btn btn-outline-success my-2" onClick={handlelogout}>Logout</button>
       ):(
         <>

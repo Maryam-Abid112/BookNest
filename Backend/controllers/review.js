@@ -2,14 +2,17 @@ import Review from '../model/Review.js';
 
 const createreview = async (req, res) => {
     try {
-         const { bookId, rating, comment } = req.body;
+        const { bookId, book, rating, comment } = req.body;
         const userId = req.user.id;
+        const reviewBookId = bookId || book;
 
-       
+        if (!reviewBookId) {
+            return res.status(400).json({ message: "Book id is required" });
+        }
 
         const review = await Review.create({
             user: userId,
-            book: bookId,
+            book: reviewBookId,
             rating,
             comment,
         });

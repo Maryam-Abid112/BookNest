@@ -1,24 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import signup from "../lib/signup";
+import { AuthContext } from "../context/Authcontext";
 
 export default function page() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const { setToken } = useContext(AuthContext);
 
-  const handleSignup =  (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     try {
-      const result = signup(name,
-        email,
-        password);
-        localStorage.setItem("token", result.token);
+      const data = await signup(name, email, password);
+
+      if (!data?.token) {
+        console.error("Signup failed: no token received");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      setToken(data.token);
       router.push("/book");
     } catch (error) {
       console.error("Signup failed:", error);

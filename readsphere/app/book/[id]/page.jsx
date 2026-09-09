@@ -17,7 +17,7 @@ export default async function page({params}) {
   return (
     <>
     <Bookdetail book={book} />
-      <Reviews reviews={review} />
+      <Reviews reviews={review} bookid={id} />
 
     </>
   )

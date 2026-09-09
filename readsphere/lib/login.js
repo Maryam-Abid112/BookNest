@@ -1,6 +1,6 @@
 const login=async(email,password)=>{
     
-    const response=await fetch("http://localhost:3000/api/login",{method: "POST",
+    const response=await fetch("http://localhost:5000/api/User/login",{method: "POST",
         headers: {
             "Content-Type": "application/json"
         },

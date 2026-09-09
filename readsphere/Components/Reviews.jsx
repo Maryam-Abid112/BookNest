@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import addreview from "../lib/review";
 
-export default function Reviews({ reviews = [] }) {
+export default function Reviews({ reviews = [], bookid }) {
   const [showModal, setShowModal] = useState(false);
 
   const handleReviews = () => {
@@ -12,6 +13,17 @@ export default function Reviews({ reviews = [] }) {
   const closeModal = () => {
     setShowModal(false);
   };
+
+  const[rating,setrating]=useState();
+  const[comment,setcomment]=useState(''); 
+  const submitreview=async(e)=>{
+    e.preventDefault();
+    const data=await addreview(bookid,rating,comment);
+    console.log(data);
+    alert("Review submitted successfully");
+    closeModal();
+
+  }
 
   return (
     <section className="mt-5 pt-5 border-top">
@@ -95,7 +107,7 @@ export default function Reviews({ reviews = [] }) {
                     Rating
                   </label>
 
-                  <select className="form-select">
+                  <select className="form-select" value={rating} onChange={(e) => setrating(e.target.value)}>
                     <option value="5">⭐ 5 - Excellent</option>
                     <option value="4">⭐ 4 - Very Good</option>
                     <option value="3">⭐ 3 - Good</option>
@@ -109,10 +121,12 @@ export default function Reviews({ reviews = [] }) {
                     Your Review
                   </label>
 
-                  <textarea
+                  <textarea 
                     className="form-control"
                     rows="4"
                     placeholder="Write your review..."
+                    value={comment}
+                    onChange={(e) => setcomment(e.target.value)}
                   />
                 </div>
 
@@ -132,6 +146,7 @@ export default function Reviews({ reviews = [] }) {
                 <button
                   type="button"
                   className="btn btn-dark"
+                  onClick={submitreview}
                 >
                   Submit Review
                 </button>
