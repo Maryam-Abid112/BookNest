@@ -5,6 +5,7 @@ import connectDB from "./config/mongodb.js";
 import bookRoutes from "./routes/book.js";
 import userroutes from './routes/user.js'
 import  reviewroutes from './routes/reviewroutes.js';
+import libraryroutes from './routes/library.js';
 
 
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/api/books", bookRoutes);
 app.use("/api/User", userroutes);
 app.use("/api/review",reviewroutes);
+app.use("/api/library",libraryroutes);
 
 app.get("/", (req, res) => {
   res.send("Booknest API is running");

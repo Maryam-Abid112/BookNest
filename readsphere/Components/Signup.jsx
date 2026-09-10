@@ -11,7 +11,7 @@ export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const { setToken } = useContext(AuthContext);
+  const { setToken, setname } = useContext(AuthContext);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -24,7 +24,11 @@ export default function page() {
         return;
       }
 
+      const userName = data?.user?.name || name;
+
       localStorage.setItem("token", data.token);
+      localStorage.setItem("name", userName);
+      setname(userName);
       setToken(data.token);
       router.push("/book");
     } catch (error) {

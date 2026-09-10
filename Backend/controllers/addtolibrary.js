@@ -25,13 +25,13 @@ const removefromlibrary = async (req, res) => {
         const library = await UserLibrary.findOneAndDelete({
             _id: id,
             user: userId
-        });
+        }).populate("book");
 
         if (!library) {
             return res.status(404).json({ message: "Review not found or you are not authorized", });
         }
 
-        return res.status(201).json({ message: "Remove from library" });
+        return res.status(201).json({ message: "Remove from library"});
 
 
 
@@ -48,7 +48,7 @@ const updatelibrary = async (req, res) => {
     try {
         const { id, status } = req.body;
         const userId = req.user.id;
-        const library = await UserLibrary.findOneAndUpdate({ _id: id, user: userId }, { status: status });
+        const library = await UserLibrary.findOneAndUpdate({ _id: id, user: userId }, { status: status }).populate("book");
         if (!library) {
             return res.status(404).json({ message: "Review not found or you are not authorized", });
         }
@@ -68,7 +68,7 @@ const getuserlibrary = async (req, res) => {
 
         const library = await UserLibrary.find({
             user: userId,
-        });
+        }).populate("book");
 
         return res.status(200).json({
             library,

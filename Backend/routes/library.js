@@ -1,6 +1,6 @@
 import express from 'express'
-import {getuserlibrary,addtolibrary,updatelibrary,removefromlibrary} from '../controllers/addtolibrary'
-import {protect} from '../middleware/middle'
+import {getuserlibrary,addtolibrary,updatelibrary,removefromlibrary} from '../controllers/addtolibrary.js'
+import {protect} from '../middleware/middle.js'
 
 const router=express.Router();
 

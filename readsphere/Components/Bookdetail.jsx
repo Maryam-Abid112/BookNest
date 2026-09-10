@@ -1,13 +1,25 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
+import {addtolibrary} from '../lib/Library'
 
 export default function Bookdetail({ book }) {
+     const addlibrary=async(e)=>{
+    e.preventDefault();
+    const data=await addtolibrary(book._id);
+    console.log(data);
+    alert("Added to Library");
+
+  }
+
     return (
         <>
             <div className="container py-5">
 
                 {/* Back Button */} <Link href="/" className="btn btn-outline-dark mb-4"> ← Back to Books </Link>
+            
                 {/* Book Details */}
+               
                 <div className="row g-5"> {/* Cover */}
                     <div className="col-md-4">
                         <img src={book.coverImage} alt={book.title} className="img-fluid rounded shadow" />
@@ -19,7 +31,9 @@ export default function Bookdetail({ book }) {
                             <strong>Published:</strong> {book.publishedYear} </p> {/* Genres */}
                         <div className="mb-4"> <strong>Genres:</strong>
                             <div className="d-flex flex-wrap gap-2 mt-2"> {book.genres.map((genre) => (<Link key={genre} href={`/Genre/${encodeURIComponent(genre)}`} className="badge text-bg-light border text-decoration-none" > {genre} </Link>))}
+                           
                             </div>
+                              <button className=' btn btn-outline-dark mt-3' onClick={addlibrary}>Add to library</button>
                         </div>
                     </div></div></div>
                     

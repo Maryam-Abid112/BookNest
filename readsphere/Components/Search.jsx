@@ -17,23 +17,27 @@ export default function Navbar() {
   };
 
   return (
-    
-      
-      <form onSubmit={handleSearch}>
+    <form
+      onSubmit={handleSearch}
+      className="d-flex"
+      role="search"
+    >
 
-        <input
-          type="search"
-          placeholder="Search Books"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <input
+        type="search"
+        className="form-control me-2"
+        placeholder="Search books..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
-        <button type="submit">
-          Search
-        </button>
+      <button
+        type="submit"
+        className="btn btn-dark px-3"
+      >
+        Search
+      </button>
 
-      </form>
-
-
+    </form>
   );
 }

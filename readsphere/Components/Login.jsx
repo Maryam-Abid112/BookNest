@@ -10,7 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const { setToken } = useContext(AuthContext);
+  const { setToken, setname } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,7 +27,13 @@ export default function Login() {
         return;
       }
 
+      const userName = data?.user?.name;
+
       localStorage.setItem("token", data.token);
+      if (userName) {
+        localStorage.setItem("name", userName);
+        setname(userName);
+      }
       setToken(data.token);
       router.push('/book');
     } catch (err) {
