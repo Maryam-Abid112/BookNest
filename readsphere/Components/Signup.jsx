@@ -98,7 +98,7 @@ return (
 
       <p className="text-center mt-3 mb-0">
         Already have an account?{" "}
-        <Link href="/login">
+        <Link href="/Login">
           Login
         </Link>
       </p>

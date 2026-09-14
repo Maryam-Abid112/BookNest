@@ -13,19 +13,29 @@ export default function GenreSearch() {
     };
   return (
     <>
-     <form onSubmit={handleSearch} className="d-flex mb-4">
+    <form
+      onSubmit={handleSearch}
+      className="d-flex align-items-center gap-2 mb-4"
+      role="search"
+      style={{ maxWidth: '420px' }}
+    >
 
-        <input
-          type="search"
-          placeholder="Search Books"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <input
+        type="search"
+        className="form-control"
+        placeholder="Search books..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ maxWidth: '280px' }}
+      />
 
-        <button type="submit">
-          Search
-        </button>
+      <button
+        type="submit"
+        className="btn btn-dark px-3"
+      >
+        Search
+      </button>
 
-      </form></>
+    </form></>
   )
 }

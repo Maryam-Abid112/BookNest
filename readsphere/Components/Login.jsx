@@ -11,6 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const { setToken, setname } = useContext(AuthContext);
+  const [message,setmessage]=useState('')
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,9 +19,11 @@ export default function Login() {
     try {
       const data = await login(email, password);
 
-      if(data.message=="No User exists"){
-        alert("Incorrect Email or Password");
+      if(data.message=="No User exists"||"Invalid password"){
+        setmessage("Incorrect Email or Password");
+        
       }
+      
 
       if (!data?.token) {
         console.error("Login failed: no token received");
@@ -36,6 +39,7 @@ export default function Login() {
       }
       setToken(data.token);
       router.push('/book');
+      setmessage('')
     } catch (err) {
       console.error("Login failed:", err);
     }
@@ -51,7 +55,11 @@ export default function Login() {
 
       <form onSubmit={handleLogin}>
 
+ {message}
+
         <div className="mb-3">
+         
+         
           <label className="form-label">Email</label>
 
           <input
@@ -62,6 +70,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+
         </div>
 
         <div className="mb-3">
@@ -76,6 +85,7 @@ export default function Login() {
             required
           />
         </div>
+        
 
         <button
           type="submit"
