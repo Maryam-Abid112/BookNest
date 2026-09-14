@@ -49,25 +49,25 @@ Built with **Next.js, React, Node.js, Express, and MongoDB**, BookNest provides 
 
 <!-- Add your Home Page screenshot here -->
 
-![BookNest Home Page](./screenshots/home.png)
+![BookNest Home Page](./screenshots/home.jpeg)
 
 ### 📖 Book Details
 
 <!-- Add your Book Details screenshot here -->
 
-![Book Details](./screenshots/book-details.png)
+![Book Details](./screenshots/book-details.jpeg)
 
 ### 📚 Personal Library
 
 <!-- Add your Library screenshot here -->
 
-![Personal Library](./screenshots/library.png)
+![Personal Library](./screenshots/library.jpeg)
 
-### 🔐 Login
+### 🔐 Signup
 
 <!-- Add your Login screenshot here -->
 
-![Login](./screenshots/login.png)
+![Login](./screenshots/signup.jpeg)
 
 ---
 
