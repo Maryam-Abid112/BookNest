@@ -111,7 +111,7 @@ Make sure you have the following installed:
 Create a `.env` file inside the `Backend` folder:
 
 ```env
-MONGODB_URI=mongodb://localhost:27017/booknest
+MONGODB_URI=your_mongodb_connection_string
 PORT=5000
 JWT_SECRET=your_secret_key
 ```
