@@ -15,7 +15,7 @@ const getbookbyid = async (req, res) => {
     try {
         const { id } = req.params;
         const book = await Book.findById(id);
-        if (book.length==0){
+        if (!book) {
             console.log("No such book exist");
             return res.status(404).json({ message: "No book found" });
         }

@@ -8,6 +8,7 @@ import  reviewroutes from './routes/reviewroutes.js';
 import libraryroutes from './routes/library.js';
 import cartRoutes from "./routes/cart.js";
 import orderRoutes from "./routes/orders.js";
+import { handleStripeWebhook } from "./controllers/orders.js";
 
 
 
@@ -21,6 +22,11 @@ app.use(cors({
     origin:"http://localhost:3000",
 }));
 
+app.post(
+  "/api/orders/stripe/webhook",
+  express.raw({ type: "application/json" }),
+  handleStripeWebhook
+);
 app.use(express.json());
 app.use("/api/books", bookRoutes);
 app.use("/api/User", userroutes);

@@ -120,9 +120,21 @@ Create a `.env` file inside the `Backend` folder:
 MONGODB_URI=your_mongodb_connection_string
 PORT=5000
 JWT_SECRET=your_secret_key
+STRIPE_SECRET_KEY=your_stripe_test_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_signing_secret
+STRIPE_CURRENCY=pkr
+FRONTEND_URL=http://localhost:3000
 ```
 
 > Keep your `.env` file private and do not commit it to GitHub.
+
+For local Stripe testing, forward Stripe events to the backend webhook:
+
+```bash
+stripe listen --forward-to localhost:5000/api/orders/stripe/webhook
+```
+
+Set `STRIPE_WEBHOOK_SECRET` to the signing secret printed by Stripe CLI. For a deployed app, configure the Stripe webhook endpoint at `/api/orders/stripe/webhook` and subscribe to `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`, and `checkout.session.expired`.
 
 ---
 

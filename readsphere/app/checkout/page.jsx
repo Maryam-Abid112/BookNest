@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getCart } from "../../lib/Cart";
-import { placeOrder } from "../../lib/Orders";
+import {
+  cancelStripeCheckout,
+  confirmStripePayment,
+  createStripeCheckoutSession,
+  placeOrder,
+} from "../../lib/Orders";
 
 const initialDetails = {
   fullName: "",
@@ -44,6 +49,42 @@ export default function CheckoutPage() {
       }
 
       try {
+        const query = new URLSearchParams(window.location.search);
+        const paymentState = query.get("payment");
+
+        if (paymentState === "success") {
+          const sessionId = query.get("session_id");
+          if (!sessionId) {
+            throw new Error("Stripe did not return a checkout session reference");
+          }
+          const result = await confirmStripePayment(sessionId);
+          if (active) {
+            setPlacedOrder(result.order);
+            setNotice("Your Stripe payment was successful and your order is confirmed.");
+            localStorage.removeItem("booknest:order-note");
+            router.replace("/checkout");
+          }
+          return;
+        }
+
+        if (paymentState === "cancelled") {
+          const orderId = query.get("order_id");
+          if (orderId) {
+            const result = await cancelStripeCheckout(orderId);
+            if (result.paymentCompleted && active) {
+              setPlacedOrder(result.order);
+              setNotice("Your Stripe payment was successful and your order is confirmed.");
+              localStorage.removeItem("booknest:order-note");
+              router.replace("/checkout");
+              return;
+            }
+          }
+          if (active) {
+            setNotice("Payment was cancelled. Your cart has been restored.");
+            router.replace("/checkout");
+          }
+        }
+
         const data = await getCart();
         if (active) {
           setCart(data.cart);
@@ -88,18 +129,30 @@ export default function CheckoutPage() {
     setNotice("");
 
     try {
-      const result = await placeOrder({
+      const checkoutDetails = {
         ...details,
         orderNote: localStorage.getItem("booknest:order-note") || "",
-      });
+      };
+
+      if (details.paymentMethod === "online") {
+        const result = await createStripeCheckoutSession(checkoutDetails);
+        if (
+          typeof result.url !== "string" ||
+          new URL(result.url).hostname !== "checkout.stripe.com"
+        ) {
+          throw new Error("Stripe did not return a valid checkout link");
+        }
+        window.location.assign(result.url);
+        return;
+      }
+
+      const result = await placeOrder(checkoutDetails);
       setPlacedOrder(result.order);
       setCart([]);
       localStorage.removeItem("booknest:order-note");
       localStorage.removeItem("booknest:guest-cart");
       setNotice(
-        details.paymentMethod === "online"
-          ? "Your order has been saved. Online payment is not connected yet, so payment is still pending."
-          : "Your order has been saved. Payment is due on delivery."
+        "Your order has been saved. Payment is due on delivery."
       );
     } catch (requestError) {
       setSubmitError(requestError.message);
@@ -340,7 +393,7 @@ export default function CheckoutPage() {
                   <label className="form-check-label" htmlFor="online">
                     Online payment
                     <span className="d-block small text-muted">
-                      Online payments will be enabled in a later step.
+                      You will be redirected to Stripe to pay securely.
                     </span>
                   </label>
                 </div>
@@ -352,7 +405,13 @@ export default function CheckoutPage() {
               className="btn btn-dark btn-lg w-100"
               disabled={submitting}
             >
-              {submitting ? "Placing order..." : "Place order"}
+              {submitting
+                ? details.paymentMethod === "online"
+                  ? "Opening Stripe..."
+                  : "Placing order..."
+                : details.paymentMethod === "online"
+                  ? "Pay with Stripe"
+                  : "Place order"}
             </button>
           </form>
         </div>

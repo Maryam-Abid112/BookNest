@@ -47,6 +47,10 @@ const orderSchema = new mongoose.Schema(
         message: "An order must contain at least one item",
       },
     },
+    cartItemIds: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
+    },
     shippingAddress: {
       fullName: { type: String, required: true, trim: true, maxlength: 100 },
       phone: { type: String, required: true, trim: true, maxlength: 30 },
@@ -65,6 +69,14 @@ const orderSchema = new mongoose.Schema(
       type: String,
       enum: ["pending", "paid", "failed"],
       default: "pending",
+    },
+    stripeCheckoutSessionId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    stripePaymentIntentId: {
+      type: String,
     },
     deliveryMethod: {
       type: String,
