@@ -15,8 +15,7 @@ export default function CartPage() {
   const [quantities, setQuantities] = useState({});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [checkoutMessage, setCheckoutMessage] = useState("");
+  const [orderNote, setOrderNote] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -26,13 +25,7 @@ export default function CartPage() {
         return;
       }
 
-      if (!localStorage.getItem("token")) {
-        setIsAuthenticated(false);
-        setLoading(false);
-        return;
-      }
-
-      setIsAuthenticated(true);
+      setOrderNote(localStorage.getItem("booknest:order-note") || "");
       try {
         const data = await getCart();
         if (active) {
@@ -57,10 +50,10 @@ export default function CartPage() {
 
   const handleCheckout = () => {
     if (!localStorage.getItem("token")) {
-      router.push("/Login?redirect=%2Fcart");
+      router.push("/Login?redirect=%2Fcheckout");
       return;
     }
-    setCheckoutMessage("You are signed in. Payment processing will be added soon.");
+    router.push("/checkout");
   };
 
   const changeQuantity = async (id, quantity) => {
@@ -78,6 +71,12 @@ export default function CartPage() {
         return { ...values, [id]: item?.quantity ?? 1 };
       });
     }
+  };
+
+  const handleOrderNoteChange = (event) => {
+    const note = event.target.value;
+    setOrderNote(note);
+    localStorage.setItem("booknest:order-note", note);
   };
 
   const removeItem = async (id) => {
@@ -104,13 +103,6 @@ export default function CartPage() {
       {error && <div className="alert alert-danger" role="alert">{error}</div>}
       {loading ? (
         <p className="text-muted">Loading your cart...</p>
-      ) : !isAuthenticated ? (
-        <div className="text-center py-5">
-          <h4 className="text-muted">Log in to view your cart and continue to checkout.</h4>
-          <Link href="/Login?redirect=%2Fcart" className="btn btn-dark mt-3">
-            Log in
-          </Link>
-        </div>
       ) : cart.length === 0 ? (
         <div className="text-center py-5">
           <h4 className="text-muted">Your cart is empty</h4>
@@ -214,6 +206,20 @@ export default function CartPage() {
             <small className="text-muted">
               Shipping and taxes, if applicable, are not included.
             </small>
+            <div className="text-start mt-4">
+              <label className="form-label fw-semibold" htmlFor="order-note">
+                Order note <span className="text-muted fw-normal">(optional)</span>
+              </label>
+              <textarea
+                id="order-note"
+                className="form-control"
+                rows="3"
+                maxLength="500"
+                placeholder="Add a note about your order"
+                value={orderNote}
+                onChange={handleOrderNoteChange}
+              />
+            </div>
             <div>
               <button
                 type="button"
@@ -223,11 +229,6 @@ export default function CartPage() {
                 Check out
               </button>
             </div>
-            {checkoutMessage && (
-              <p className="alert alert-info mt-3" role="status">
-                {checkoutMessage}
-              </p>
-            )}
           </div>
         </>
       )}

@@ -7,6 +7,7 @@ import userroutes from './routes/user.js'
 import  reviewroutes from './routes/reviewroutes.js';
 import libraryroutes from './routes/library.js';
 import cartRoutes from "./routes/cart.js";
+import orderRoutes from "./routes/orders.js";
 
 
 
@@ -26,6 +27,7 @@ app.use("/api/User", userroutes);
 app.use("/api/review",reviewroutes);
 app.use("/api/library",libraryroutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.get("/", (req, res) => {
   res.send("Booknest API is running");

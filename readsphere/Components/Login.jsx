@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import login from '../lib/login';
 import Link from 'next/link';
 import { AuthContext } from '../context/Authcontext';
+import { mergeGuestCart } from '../lib/Cart';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -38,6 +39,11 @@ export default function Login() {
         setname(userName);
       }
       setToken(data.token);
+      try {
+        await mergeGuestCart();
+      } catch (error) {
+        setmessage(`Signed in, but the guest cart could not be fully transferred: ${error.message}`);
+      }
       const requestedPath = new URLSearchParams(window.location.search).get("redirect");
       const redirectPath =
         requestedPath?.startsWith("/") && !requestedPath.startsWith("//")

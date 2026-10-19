@@ -14,12 +14,6 @@ export default function Navbar() {
   const [cartError, setCartError] = useState("");
 
   const refreshCart = useCallback(async () => {
-    if (!token) {
-      setCartItems([]);
-      setCartError("");
-      return;
-    }
-
     try {
       const data = await getCart();
       setCartItems(data.cart);
@@ -27,13 +21,28 @@ export default function Navbar() {
     } catch (error) {
       setCartError(error.message);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     Promise.resolve().then(refreshCart);
     window.addEventListener("booknest:cart-updated", refreshCart);
     return () => window.removeEventListener("booknest:cart-updated", refreshCart);
-  }, [refreshCart]);
+  }, [refreshCart, token]);
+
+  useEffect(() => {
+    if (!cartOpen) {
+      return undefined;
+    }
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setCartOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [cartOpen]);
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const cartSubtotal = cartItems.reduce(
@@ -70,6 +79,15 @@ export default function Navbar() {
     }
   };
 
+  const handleDrawerCheckout = () => {
+    setCartOpen(false);
+    if (!token) {
+      router.push("/Login?redirect=%2Fcheckout");
+      return;
+    }
+    router.push("/checkout");
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -92,7 +110,7 @@ export default function Navbar() {
              
             </ul>
             <Search />
-            <div className="position-relative mx-2">
+            <div className="mx-2">
               <button
                 type="button"
                 className="btn btn-outline-dark position-relative"
@@ -121,77 +139,6 @@ export default function Navbar() {
                   </span>
                 )}
               </button>
-              {cartOpen && (
-                <div
-                  className="position-absolute end-0 mt-2 bg-white border rounded shadow p-3"
-                  style={{ width: "min(340px, 90vw)", zIndex: 1050 }}
-                >
-                  <div className="d-flex justify-content-between align-items-center mb-2">
-                    <strong>Shopping cart</strong>
-                    <button
-                      type="button"
-                      className="btn-close"
-                      aria-label="Close cart preview"
-                      onClick={() => setCartOpen(false)}
-                    />
-                  </div>
-                  {cartError ? (
-                    <p className="small text-danger mb-2">{cartError}</p>
-                  ) : !token ? (
-                    <p className="small text-muted mb-2">Log in to see your cart.</p>
-                  ) : cartItems.length === 0 ? (
-                    <p className="small text-muted mb-2">Your cart is empty.</p>
-                  ) : (
-                    <>
-                      <div className="overflow-auto" style={{ maxHeight: "260px" }}>
-                        {cartItems.map((item) => (
-                          <div
-                            key={item._id}
-                            className="d-flex justify-content-between align-items-start gap-2 border-bottom py-2"
-                          >
-                            <div className="small">
-                              <div className="fw-semibold">{item.book?.title || "Unavailable book"}</div>
-                              <div className="text-muted">
-                                {item.quantity} × {Number.isFinite(item.book?.price) ? item.book.price.toFixed(2) : "Price unavailable"}
-                              </div>
-                            </div>
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-link text-danger p-0"
-                              aria-label={`Remove ${item.book?.title || "book"} from cart`}
-                              onClick={() => handleRemoveCartItem(item._id)}
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="d-flex justify-content-between fw-semibold mt-2">
-                        <span>Subtotal</span>
-                        <span>{cartSubtotal.toFixed(2)}</span>
-                      </div>
-                    </>
-                  )}
-                  <div className="d-flex gap-2 mt-3">
-                    {!token && (
-                      <Link
-                        href="/Login?redirect=%2Fcart"
-                        className="btn btn-outline-dark btn-sm flex-fill"
-                        onClick={() => setCartOpen(false)}
-                      >
-                        Log in
-                      </Link>
-                    )}
-                    <Link
-                      href="/cart"
-                      className="btn btn-dark btn-sm flex-fill"
-                      onClick={() => setCartOpen(false)}
-                    >
-                      View cart
-                    </Link>
-                  </div>
-                </div>
-              )}
             </div>
             {(token) ? (
               <>
@@ -217,6 +164,120 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+      {cartOpen && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100"
+          style={{ zIndex: 2000 }}
+        >
+          <button
+            type="button"
+            className="position-absolute top-0 start-0 w-100 h-100 border-0"
+            style={{ background: "rgba(0, 0, 0, 0.45)" }}
+            aria-label="Close shopping cart"
+            onClick={() => setCartOpen(false)}
+          />
+          <aside
+            className="position-absolute top-0 end-0 h-100 bg-white shadow-lg d-flex flex-column"
+            style={{ width: "min(420px, 100vw)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Shopping cart"
+          >
+            <div className="d-flex justify-content-between align-items-center p-4 border-bottom">
+              <div>
+                <h2 className="h5 mb-1">Your cart</h2>
+                <span className="small text-muted">{cartCount} items</span>
+              </div>
+              <button
+                type="button"
+                className="btn-close"
+                aria-label="Close cart"
+                onClick={() => setCartOpen(false)}
+              />
+            </div>
+
+            <div className="flex-grow-1 overflow-auto p-3">
+              {cartError ? (
+                <p className="small text-danger">{cartError}</p>
+              ) : cartItems.length === 0 ? (
+                <p className="text-center text-muted py-5">Your cart is empty.</p>
+              ) : (
+                cartItems.map((item) => (
+                  <div
+                    key={item._id}
+                    className="d-flex gap-3 border-bottom py-3"
+                  >
+                    <div
+                      className="d-flex align-items-center justify-content-center bg-light rounded flex-shrink-0"
+                      style={{ width: "72px", height: "96px" }}
+                    >
+                      {item.book?.coverImage && (
+                        <img
+                          src={item.book.coverImage}
+                          alt={item.book.title}
+                          className="mw-100 mh-100 rounded"
+                          style={{ objectFit: "contain" }}
+                        />
+                      )}
+                    </div>
+                    <div className="flex-grow-1 min-w-0">
+                      <div className="fw-semibold text-truncate">
+                        {item.book?.title || "Unavailable book"}
+                      </div>
+                      <div className="small text-muted">
+                        Quantity: {item.quantity}
+                      </div>
+                      <div className="small">
+                        {Number.isFinite(item.book?.price)
+                          ? `${item.book.price.toFixed(2)} each`
+                          : "Price unavailable"}
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-link btn-sm text-danger p-0 mt-1"
+                        onClick={() => handleRemoveCartItem(item._id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <div className="small fw-semibold text-nowrap">
+                      {Number.isFinite(item.book?.price)
+                        ? (item.book.price * item.quantity).toFixed(2)
+                        : "—"}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <div className="border-top p-4">
+              {cartItems.length > 0 && (
+                <div className="d-flex justify-content-between fw-semibold mb-3">
+                  <span>Subtotal</span>
+                  <span>{cartSubtotal.toFixed(2)}</span>
+                </div>
+              )}
+              <div className="d-flex gap-2">
+                <Link
+                  href="/cart"
+                  className="btn btn-outline-dark flex-fill"
+                  onClick={() => setCartOpen(false)}
+                >
+                  View cart
+                </Link>
+                <button
+                  type="button"
+                  className="btn btn-dark flex-fill"
+                  onClick={handleDrawerCheckout}
+                  disabled={cartItems.length === 0}
+                >
+                  Checkout
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      )}
     </>
   )
 }

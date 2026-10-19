@@ -20,7 +20,7 @@ export default function Bookdetail({ book }) {
     const handleAddToCart = async () => {
         setCartMessage("");
         try {
-            await addToCart(book._id, quantity);
+            await addToCart(book._id, quantity, book);
             setCartMessage(`${quantity} ${quantity === 1 ? "copy" : "copies"} added to your cart.`);
         } catch (error) {
             setCartMessage(error.message);

@@ -19,9 +19,11 @@ Built with **Next.js, React, Node.js, Express, and MongoDB**, BookNest provides 
 * 🔄 **Library Management** — Update reading status or remove books from your library.
 * 🛒 **Shopping Cart** — Add books, update quantities, and remove cart items.
 * 💲 **Pricing and Stock** — Display book prices and available inventory; cart quantities cannot exceed stock.
+* 📦 **Checkout and Orders** — Collect delivery and payment preferences, then save placed orders with item and price snapshots in MongoDB.
 * 🔐 **Protected Actions** — Reviews, library, and cart features are available to authenticated users.
 
 Each MongoDB `Book` document needs a non-negative `price` and a whole-number `quantity`. Populate these values for existing books before adding them to the cart.
+Order placement uses MongoDB transactions to save the order, update stock, and clear the cart together; use MongoDB Atlas or a replica-set deployment.
 
 ---
 
@@ -194,4 +196,3 @@ http://localhost:3000
 * 🔎 Advanced filtering and sorting
 
 ---
-
