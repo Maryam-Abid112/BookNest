@@ -29,6 +29,23 @@ const bookSchema = new mongoose.Schema(
     publishedYear: {
       type: Number,
     },
+
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    quantity: {
+      type: Number,
+      required: true,
+      min: 0,
+      default: 0,
+      validate: {
+        validator: Number.isInteger,
+        message: "Quantity must be a whole number",
+      },
+    },
   },
   {
     timestamps: true,

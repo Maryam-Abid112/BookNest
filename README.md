@@ -17,7 +17,11 @@ Built with **Next.js, React, Node.js, Express, and MongoDB**, BookNest provides 
 * 📚 **Personal Library** — Add books to your personal collection.
 * 📌 **Reading Status** — Organize books as **Want to Read, Reading, or Completed**.
 * 🔄 **Library Management** — Update reading status or remove books from your library.
-* 🔐 **Protected Actions** — Reviews and library features are available to authenticated users.
+* 🛒 **Shopping Cart** — Add books, update quantities, and remove cart items.
+* 💲 **Pricing and Stock** — Display book prices and available inventory; cart quantities cannot exceed stock.
+* 🔐 **Protected Actions** — Reviews, library, and cart features are available to authenticated users.
+
+Each MongoDB `Book` document needs a non-negative `price` and a whole-number `quantity`. Populate these values for existing books before adding them to the cart.
 
 ---
 

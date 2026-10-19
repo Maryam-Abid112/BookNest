@@ -38,7 +38,12 @@ export default function Login() {
         setname(userName);
       }
       setToken(data.token);
-      router.push('/book');
+      const requestedPath = new URLSearchParams(window.location.search).get("redirect");
+      const redirectPath =
+        requestedPath?.startsWith("/") && !requestedPath.startsWith("//")
+          ? requestedPath
+          : "/book";
+      router.push(redirectPath);
       setmessage('')
     } catch (err) {
       console.error("Login failed:", err);

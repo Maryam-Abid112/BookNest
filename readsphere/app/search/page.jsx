@@ -12,21 +12,21 @@ export default async function SearchPage({ searchParams }) {
   );
 
   const data = await response.json();
-
-  console.log(data);
+  const books = Array.isArray(data.book) ? data.book : [];
 
   return (
     <div>
             <div className="container"> <h1 className="mb-4">Results</h1>
 
-         <div className="d-flex flex-row gap-4 flex-wrap">
-      {data.book.map((books) => (
-        <Bookcard
-          key={books._id}
-          book={books}
-        />
-      ))}
-      </div>
+         {books.length === 0 ? (
+           <p className="text-muted">No books found.</p>
+         ) : (
+           <div className="d-flex flex-row gap-4 flex-wrap">
+             {books.map((book) => (
+               <Bookcard key={book._id} book={book} />
+             ))}
+           </div>
+         )}
       </div>
     </div>
   );
