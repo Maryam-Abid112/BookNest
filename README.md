@@ -46,36 +46,10 @@ Order placement uses MongoDB transactions to save the order, update stock, and c
 * JWT
 * bcrypt
 * CORS
-
+*
 ---
 
-## 🖼️ Screenshots
 
-### 🏠 Home Page
-
-<!-- Add your Home Page screenshot here -->
-
-![BookNest Home Page](./screenshots/home.jpeg)
-
-### 📖 Book Details
-
-<!-- Add your Book Details screenshot here -->
-
-![Book Details](./screenshots/book-details.jpeg)
-
-### 📚 Personal Library
-
-<!-- Add your Library screenshot here -->
-
-![Personal Library](./screenshots/library.jpeg)
-
-### 🔐 Signup
-
-<!-- Add your Login screenshot here -->
-
-![Login](./screenshots/signup.jpeg)
-
----
 
 ## 📂 Project Structure
 
@@ -202,7 +176,6 @@ http://localhost:3000
 
 * 🤖 Personalized book recommendations
 * 🛠️ Admin dashboard
-* ❤️ Wishlist functionality
 * 👤 Profile customization
 * 📊 Reading statistics
 * 🔎 Advanced filtering and sorting
