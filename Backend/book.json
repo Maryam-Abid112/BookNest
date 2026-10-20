@@ -1,0 +1,294 @@
+
+[
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "description": "A young shepherd travels in search of treasure and discovers the importance of following his dreams.",
+    "genres": ["Fiction", "Adventure"],
+    "coverImage": "https://placehold.co/300x450?text=The+Alchemist",
+    "publishedYear": 1988,
+    "price": 850,
+    "quantity": 15
+  },
+
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "description": "A mysterious millionaire throws extravagant parties while pursuing love and the American dream.",
+    "genres": ["Classic", "Fiction"],
+    "coverImage": "https://placehold.co/300x450?text=The+Great+Gatsby",
+    "publishedYear": 1925,
+    "price": 650,
+    "quantity": 12
+  },
+  {
+    "title": "Harry Potter and the Philosopher's Stone",
+    "author": "J. K. Rowling",
+    "description": "A young boy discovers that he is a wizard and begins his magical education at Hogwarts.",
+    "genres": ["Fantasy", "Adventure"],
+    "coverImage": "https://placehold.co/300x450?text=Harry+Potter",
+    "publishedYear": 1997,
+    "price": 1200,
+    "quantity": 18
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J. R. R. Tolkien",
+    "description": "Bilbo Baggins joins a group of dwarves on an adventurous journey to reclaim their treasure.",
+    "genres": ["Fantasy", "Adventure"],
+    "coverImage": "https://placehold.co/300x450?text=The+Hobbit",
+    "publishedYear": 1937,
+    "price": 1100,
+    "quantity": 10
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "description": "Elizabeth Bennet navigates love, family expectations, and misunderstandings in English society.",
+    "genres": ["Romance", "Classic"],
+    "coverImage": "https://placehold.co/300x450?text=Pride+and+Prejudice",
+    "publishedYear": 1813,
+    "price": 700,
+    "quantity": 14
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "description": "A young girl witnesses injustice and learns about courage, compassion, and morality.",
+    "genres": ["Classic", "Fiction"],
+    "coverImage": "https://placehold.co/300x450?text=To+Kill+a+Mockingbird",
+    "publishedYear": 1960,
+    "price": 900,
+    "quantity": 9
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "description": "In a dystopian society, a man struggles against a government that controls information and thought.",
+    "genres": ["Dystopian", "Science Fiction"],
+    "coverImage": "https://placehold.co/300x450?text=1984",
+    "publishedYear": 1949,
+    "price": 750,
+    "quantity": 16
+  },
+  {
+    "title": "Animal Farm",
+    "author": "George Orwell",
+    "description": "Farm animals rebel against their human owner, but their new society gradually becomes oppressive.",
+    "genres": ["Satire", "Classic"],
+    "coverImage": "https://placehold.co/300x450?text=Animal+Farm",
+    "publishedYear": 1945,
+    "price": 600,
+    "quantity": 11
+  },
+  {
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "description": "A therapist investigates why a famous painter stopped speaking after a shocking crime.",
+    "genres": ["Thriller", "Mystery"],
+    "coverImage": "https://placehold.co/300x450?text=The+Silent+Patient",
+    "publishedYear": 2019,
+    "price": 1300,
+    "quantity": 8
+  },
+  {
+    "title": "The Book Thief",
+    "author": "Markus Zusak",
+    "description": "A young girl in Nazi Germany finds comfort in books while facing the hardships of war.",
+    "genres": ["Historical Fiction", "Drama"],
+    "coverImage": "https://placehold.co/300x450?text=The+Book+Thief",
+    "publishedYear": 2005,
+    "price": 1000,
+    "quantity": 7
+  },
+  {
+    "title": "The Kite Runner",
+    "author": "Khaled Hosseini",
+    "description": "A man reflects on friendship, guilt, and redemption against the backdrop of Afghanistan's history.",
+    "genres": ["Fiction", "Drama"],
+    "coverImage": "https://placehold.co/300x450?text=The+Kite+Runner",
+    "publishedYear": 2003,
+    "price": 950,
+    "quantity": 13
+  },
+  {
+    "title": "A Thousand Splendid Suns",
+    "author": "Khaled Hosseini",
+    "description": "Two Afghan women form a powerful bond while enduring difficult circumstances and social change.",
+    "genres": ["Historical Fiction", "Drama"],
+    "coverImage": "https://placehold.co/300x450?text=Splendid+Suns",
+    "publishedYear": 2007,
+    "price": 1050,
+    "quantity": 6
+  },
+  {
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "description": "Two teenagers meet at a support group and develop a relationship that changes their lives.",
+    "genres": ["Romance", "Young Adult"],
+    "coverImage": "https://placehold.co/300x450?text=Fault+in+Our+Stars",
+    "publishedYear": 2012,
+    "price": 850,
+    "quantity": 17
+  },
+  {
+    "title": "It Ends with Us",
+    "author": "Colleen Hoover",
+    "description": "A young woman confronts difficult relationship choices while reflecting on her past.",
+    "genres": ["Romance", "Contemporary Fiction"],
+    "coverImage": "https://placehold.co/300x450?text=It+Ends+with+Us",
+    "publishedYear": 2016,
+    "price": 1400,
+    "quantity": 10
+  },
+  {
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
+    "description": "A woman explores alternate versions of her life through a mysterious library between life and death.",
+    "genres": ["Fantasy", "Fiction"],
+    "coverImage": "https://placehold.co/300x450?text=Midnight+Library",
+    "publishedYear": 2020,
+    "price": 1250,
+    "quantity": 9
+  },
+  {
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "description": "An overview of human history, from early humans to modern societies and technology.",
+    "genres": ["History", "Nonfiction"],
+    "coverImage": "https://placehold.co/300x450?text=Sapiens",
+    "publishedYear": 2011,
+    "price": 1800,
+    "quantity": 5
+  },
+  {
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "description": "Explains how focused, distraction-free work can improve productivity and the quality of results.",
+    "genres": ["Productivity", "Self-Help"],
+    "coverImage": "https://placehold.co/300x450?text=Deep+Work",
+    "publishedYear": 2016,
+    "price": 1350,
+    "quantity": 12
+  },
+  {
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert T. Kiyosaki",
+    "description": "Introduces basic financial concepts through contrasting lessons about money and wealth.",
+    "genres": ["Finance", "Self-Help"],
+    "coverImage": "https://placehold.co/300x450?text=Rich+Dad+Poor+Dad",
+    "publishedYear": 1997,
+    "price": 1150,
+    "quantity": 19
+  },
+  {
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "description": "Discusses mindset, goal setting, persistence, and principles associated with personal success.",
+    "genres": ["Personal Development", "Finance"],
+    "coverImage": "https://placehold.co/300x450?text=Think+and+Grow+Rich",
+    "publishedYear": 1937,
+    "price": 800,
+    "quantity": 8
+  },
+  {
+    "title": "The Psychology of Money",
+    "author": "Morgan Housel",
+    "description": "Explores how personal experiences and behavior influence financial decisions and wealth.",
+    "genres": ["Finance", "Psychology"],
+    "coverImage": "https://placehold.co/300x450?text=Psychology+of+Money",
+    "publishedYear": 2020,
+    "price": 1450,
+    "quantity": 14
+  },
+  {
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "description": "A symbologist investigates a murder and follows clues hidden in art and historical mysteries.",
+    "genres": ["Mystery", "Thriller"],
+    "coverImage": "https://placehold.co/300x450?text=Da+Vinci+Code",
+    "publishedYear": 2003,
+    "price": 1000,
+    "quantity": 11
+  },
+  {
+    "title": "Angels and Demons",
+    "author": "Dan Brown",
+    "description": "A professor races to uncover a conspiracy involving a secret society and the Vatican.",
+    "genres": ["Thriller", "Mystery"],
+    "coverImage": "https://placehold.co/300x450?text=Angels+and+Demons",
+    "publishedYear": 2000,
+    "price": 950,
+    "quantity": 7
+  },
+  {
+    "title": "The Hunger Games",
+    "author": "Suzanne Collins",
+    "description": "Katniss Everdeen enters a televised fight for survival in a society divided by power.",
+    "genres": ["Dystopian", "Adventure"],
+    "coverImage": "https://placehold.co/300x450?text=Hunger+Games",
+    "publishedYear": 2008,
+    "price": 1100,
+    "quantity": 16
+  },
+  {
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "description": "A young noble becomes involved in political conflict over a valuable resource on a desert planet.",
+    "genres": ["Science Fiction", "Adventure"],
+    "coverImage": "https://placehold.co/300x450?text=Dune",
+    "publishedYear": 1965,
+    "price": 1600,
+    "quantity": 6
+  },
+  {
+    "title": "The Lord of the Rings",
+    "author": "J. R. R. Tolkien",
+    "description": "A fellowship sets out on a dangerous journey to destroy a powerful ring and save Middle-earth.",
+    "genres": ["Fantasy", "Adventure"],
+    "coverImage": "https://placehold.co/300x450?text=Lord+of+the+Rings",
+    "publishedYear": 1954,
+    "price": 1900,
+    "quantity": 4
+  },
+  {
+    "title": "The Little Prince",
+    "author": "Antoine de Saint-Exupery",
+    "description": "A young prince travels between planets and shares thoughtful lessons about love, friendship, and life.",
+    "genres": ["Fantasy", "Classic"],
+    "coverImage": "https://placehold.co/300x450?text=The+Little+Prince",
+    "publishedYear": 1943,
+    "price": 550,
+    "quantity": 20
+  },
+  {
+    "title": "Ikigai",
+    "author": "Hector Garcia and Francesc Miralles",
+    "description": "Explores Japanese ideas about purpose, well-being, meaningful routines, and longevity.",
+    "genres": ["Self-Help", "Philosophy"],
+    "coverImage": "https://placehold.co/300x450?text=Ikigai",
+    "publishedYear": 2016,
+    "price": 900,
+    "quantity": 13
+  },
+  {
+    "title": "The 7 Habits of Highly Effective People",
+    "author": "Stephen R. Covey",
+    "description": "Presents principles for personal responsibility, effective relationships, and long-term growth.",
+    "genres": ["Self-Help", "Productivity"],
+    "coverImage": "https://placehold.co/300x450?text=7+Habits",
+    "publishedYear": 1989,
+    "price": 1550,
+    "quantity": 9
+  },
+  {
+    "title": "The Old Man and the Sea",
+    "author": "Ernest Hemingway",
+    "description": "An aging fisherman struggles with a giant marlin and reflects on endurance and dignity.",
+    "genres": ["Classic", "Literary Fiction"],
+    "coverImage": "https://placehold.co/300x450?text=Old+Man+and+Sea",
+    "publishedYear": 1952,
+    "price": 650,
+    "quantity": 10
+  }
+]

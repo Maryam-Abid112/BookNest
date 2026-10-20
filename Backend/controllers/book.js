@@ -1,8 +1,27 @@
 import Book from '../model/Book.js';
 const getallbooks = async (req, res) => {
     try {
-        const books = await Book.find();
-        res.json({ books: books });
+        const page=Math.max(1,Number.parseInt(req.query.page)||1);
+        const limit=Math.max(1,Number.parseInt(req.query.limit)||10);
+        const skip=(page-1)*limit;
+        const [books,totalbooks] = await Promise.all([
+            Book.find().skip(skip).limit(limit).lean(),
+            Book.countDocuments()
+        ]);
+        const totalpages=Math.ceil(totalbooks/limit);
+
+        return res.status(200).json({
+      success: true,
+      books,
+      pagination: {
+        currentPage: page,
+        limit,
+        totalbooks,
+        totalpages,
+        hasNextPage: page < totalpages,
+        hasPrevPage: page > 1
+      }
+    });
 
     } catch (err) {
         console.log("Error", err);

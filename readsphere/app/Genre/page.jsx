@@ -6,7 +6,7 @@ import Link from 'next/link';
 import GenreSearch from '../../Components/Genresearch'
 
 export default async function page() {
-    const data = await getbook();
+    const { books = [] } = await getbook();
     
  const genres = [
   "Fiction",
@@ -32,29 +32,29 @@ export default async function page() {
 ];
 
     // fictional Books
-    const fictionbooks= data.filter((book)=>book.genres.includes(genres[0]));
+    const fictionbooks= books.filter((book)=>book.genres.includes(genres[0]));
     // Mystery Books
-    const mysterybooks= data.filter((book)=>book.genres.includes(genres[1]));
+    const mysterybooks= books.filter((book)=>book.genres.includes(genres[1]));
     
     // Romance Books
-    const romancebooks= data.filter((book)=>book.genres.includes(genres[3]));
+    const romancebooks= books.filter((book)=>book.genres.includes(genres[3]));
     //psychology Books
-    const psychologybooks= data.filter((book)=>book.genres.includes(genres[16]));
+    const psychologybooks= books.filter((book)=>book.genres.includes(genres[16]));
     // history Books
-    const historybooks= data.filter((book)=>book.genres.includes(genres[17]));
+    const historybooks= books.filter((book)=>book.genres.includes(genres[17]));
 
     //Self-Help Books
-    const selfhelpbooks= data.filter((book)=>book.genres.includes(genres[15]));
+    const selfhelpbooks= books.filter((book)=>book.genres.includes(genres[15]));
     // Biography Books
-    const biographybooks= data.filter((book)=>book.genres.includes(genres[14]));
+    const biographybooks= books.filter((book)=>book.genres.includes(genres[14]));
     // Autobiography Books
-    const autobiographybooks= data.filter((book)=>book.genres.includes(genres[13]));
+    const autobiographybooks= books.filter((book)=>book.genres.includes(genres[13]));
     //Drama Books
-    const dramabooks= data.filter((book)=>book.genres.includes(genres[9]));
+    const dramabooks= books.filter((book)=>book.genres.includes(genres[9]));
     //historical Fiction Books
-    const historicalfictionbooks= data.filter((book)=>book.genres.includes(genres[7]));
+    const historicalfictionbooks= books.filter((book)=>book.genres.includes(genres[7]));
     //thriller Books
-    const thrillerbooks= data.filter((book)=>book.genres.includes(genres[2]));
+    const thrillerbooks= books.filter((book)=>book.genres.includes(genres[2]));
     
     
 
